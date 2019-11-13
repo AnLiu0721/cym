@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ShopcarDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Shopcar" >
+    <id column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_userid" property="shopUserid" jdbcType="BIGINT" />
+    <result column="shop_proid" property="shopProid" jdbcType="BIGINT" />
+    <result column="shop_pronum" property="shopPronum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_id, shop_userid, shop_proid, shop_pronum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_shopcar
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </select>
+  <!--根据用户id，产品id查购物车-->
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_shopcar
+    <where>
+      <if test="shopUid!=null">
+        and shop_userid = #{shopUid}
+      </if>
+      <if test="shopProid!=null">
+        and shop_proid=#{shopProid}
+      </if>
+    </where>
+    <!--  where shop_userid = #{shopUid,jdbcType=BIGINT} -->
+  </select>
+  <!-- 根据用户id删除购物车 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_shopcar
+    where shop_userid = #{userId,jdbcType=BIGINT}
+  </delete>
+  <!-- 根据用户和商品id删除购物车 -->
+  <delete id="deleteByif" parameterType="java.util.Map" >
+    delete from pt_shopcar
+    <where>
+      <if test="shopProid!=null and shopProid!=0l">
+        and shop_proid = #{shopProid,jdbcType=BIGINT}
+      </if>
+      <if test="shopUid !=null and shopUid !=0l">
+        and shop_userid = #{shopUid,jdbcType=BIGINT}
+      </if>
+    </where>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Shopcar">
+    insert into pt_shopcar (shop_id, shop_userid, shop_proid, 
+      shop_pronum)
+    values (default, #{shopUserid,jdbcType=BIGINT}, #{shopProid,jdbcType=BIGINT}, 
+      #{shopPronum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Shopcar" >
+    insert into pt_shopcar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopUserid != null" >
+        shop_userid,
+      </if>
+      <if test="shopProid != null" >
+        shop_proid,
+      </if>
+      <if test="shopPronum != null" >
+        shop_pronum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopUserid != null" >
+        #{shopUserid,jdbcType=BIGINT},
+      </if>
+      <if test="shopProid != null" >
+        #{shopProid,jdbcType=BIGINT},
+      </if>
+      <if test="shopPronum != null" >
+        #{shopPronum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据用户和商品id更新数量 -->
+  <update id="updateByUPid" parameterType="com.entity.Shopcar" >
+   update pt_shopcar
+    set shop_pronum = #{shopPronum,jdbcType=INTEGER}
+    where  shop_userid = #{shopUserid,jdbcType=BIGINT} 
+              and shop_proid = #{shopProid,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Shopcar" >
+    update pt_shopcar
+    <set >
+      <if test="shopUserid != null" >
+        shop_userid = #{shopUserid,jdbcType=BIGINT},
+      </if>
+      <if test="shopProid != null" >
+        shop_proid = #{shopProid,jdbcType=BIGINT},
+      </if>
+      <if test="shopPronum != null" >
+        shop_pronum = #{shopPronum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Shopcar" >
+    update pt_shopcar
+    set shop_userid = #{shopUserid,jdbcType=BIGINT},
+      shop_proid = #{shopProid,jdbcType=BIGINT},
+      shop_pronum = #{shopPronum,jdbcType=INTEGER}
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
+</mapper>

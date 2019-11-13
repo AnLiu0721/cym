@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.DiscussDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Discuss" >
+    <id column="discuss_id" property="discussId" jdbcType="BIGINT" />
+    <result column="discuss_userid" property="discussUserid" jdbcType="BIGINT" />
+    <result column="discuss_proid" property="discussProid" jdbcType="BIGINT" />
+    <result column="discuss_contect" property="discussContect" jdbcType="VARCHAR" />
+    <result column="discuss_time" property="discussTime" jdbcType="TIMESTAMP" />
+    <result column="discuss_mayi" property="discussMayi" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    discuss_id, discuss_userid, discuss_proid, discuss_contect, discuss_time, discuss_mayi
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_discuss
+    where discuss_id = #{discussId,jdbcType=BIGINT}
+  </select>
+<!--根据商品id查找商品-->
+  <select id="selectByProid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_discuss
+    where discuss_proid = #{discussProid,jdbcType=BIGINT}
+  </select>
+  <!--根据评论id删除评论-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_discuss
+    where discuss_id = #{discussId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Discuss" >
+    insert into pt_discuss (discuss_id, discuss_userid, discuss_proid, 
+      discuss_contect, discuss_time, discuss_mayi
+      )
+    values (#{discussId,jdbcType=BIGINT}, #{discussUserid,jdbcType=BIGINT}, #{discussProid,jdbcType=BIGINT}, 
+      #{discussContect,jdbcType=VARCHAR}, #{discussTime,jdbcType=TIMESTAMP}, #{discussMayi,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Discuss" >
+    insert into pt_discuss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="discussId != null" >
+        discuss_id,
+      </if>
+      <if test="discussUserid != null" >
+        discuss_userid,
+      </if>
+      <if test="discussProid != null" >
+        discuss_proid,
+      </if>
+      <if test="discussContect != null" >
+        discuss_contect,
+      </if>
+      <if test="discussTime != null" >
+        discuss_time,
+      </if>
+      <if test="discussMayi != null" >
+        discuss_mayi,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="discussId != null" >
+        #{discussId,jdbcType=BIGINT},
+      </if>
+      <if test="discussUserid != null" >
+        #{discussUserid,jdbcType=BIGINT},
+      </if>
+      <if test="discussProid != null" >
+        #{discussProid,jdbcType=BIGINT},
+      </if>
+      <if test="discussContect != null" >
+        #{discussContect,jdbcType=VARCHAR},
+      </if>
+      <if test="discussTime != null" >
+        #{discussTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discussMayi != null" >
+        #{discussMayi,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Discuss" >
+    update pt_discuss
+    <set >
+      <if test="discussUserid != null" >
+        discuss_userid = #{discussUserid,jdbcType=BIGINT},
+      </if>
+      <if test="discussProid != null" >
+        discuss_proid = #{discussProid,jdbcType=BIGINT},
+      </if>
+      <if test="discussContect != null" >
+        discuss_contect = #{discussContect,jdbcType=VARCHAR},
+      </if>
+      <if test="discussTime != null" >
+        discuss_time = #{discussTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discussMayi != null" >
+        discuss_mayi = #{discussMayi,jdbcType=INTEGER},
+      </if>
+    </set>
+    where discuss_id = #{discussId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Discuss" >
+    update pt_discuss
+    set discuss_userid = #{discussUserid,jdbcType=BIGINT},
+      discuss_proid = #{discussProid,jdbcType=BIGINT},
+      discuss_contect = #{discussContect,jdbcType=VARCHAR},
+      discuss_time = #{discussTime,jdbcType=TIMESTAMP},
+      discuss_mayi = #{discussMayi,jdbcType=INTEGER}
+    where discuss_id = #{discussId,jdbcType=BIGINT}
+  </update>
+</mapper>

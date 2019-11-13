@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ReaddressDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Readdress" >
+    <id column="readdress_id" property="readdressId" jdbcType="BIGINT" />
+    <result column="readdress_userid" property="readdressUserid" jdbcType="BIGINT" />
+    <result column="readdress_name" property="readdressName" jdbcType="VARCHAR" />
+    <result column="readdress_phone" property="readdressPhone" jdbcType="VARCHAR" />
+    <result column="readdress_address" property="readdressAddress" jdbcType="VARCHAR" />
+    <result column="readdress_isdefault" property="readdressIsdefault" jdbcType="INTEGER" />
+    <result column="readdress_postcode" property="readdressPostcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    readdress_id, readdress_userid, readdress_name, readdress_phone, readdress_address, 
+    readdress_isdefault, readdress_postcode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_readdress
+    where readdress_id = #{readdressId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_readdress
+    where readdress_id = #{readdressId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Readdress" >
+    insert into pt_readdress (readdress_id, readdress_userid, readdress_name, 
+      readdress_phone, readdress_address, readdress_isdefault, 
+      readdress_postcode)
+    values (#{readdressId,jdbcType=BIGINT}, #{readdressUserid,jdbcType=BIGINT}, #{readdressName,jdbcType=VARCHAR}, 
+      #{readdressPhone,jdbcType=VARCHAR}, #{readdressAddress,jdbcType=VARCHAR}, #{readdressIsdefault,jdbcType=INTEGER}, 
+      #{readdressPostcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Readdress" >
+    insert into pt_readdress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="readdressId != null" >
+        readdress_id,
+      </if>
+      <if test="readdressUserid != null" >
+        readdress_userid,
+      </if>
+      <if test="readdressName != null" >
+        readdress_name,
+      </if>
+      <if test="readdressPhone != null" >
+        readdress_phone,
+      </if>
+      <if test="readdressAddress != null" >
+        readdress_address,
+      </if>
+      <if test="readdressIsdefault != null" >
+        readdress_isdefault,
+      </if>
+      <if test="readdressPostcode != null" >
+        readdress_postcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="readdressId != null" >
+        #{readdressId,jdbcType=BIGINT},
+      </if>
+      <if test="readdressUserid != null" >
+        #{readdressUserid,jdbcType=BIGINT},
+      </if>
+      <if test="readdressName != null" >
+        #{readdressName,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressPhone != null" >
+        #{readdressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressAddress != null" >
+        #{readdressAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressIsdefault != null" >
+        #{readdressIsdefault,jdbcType=INTEGER},
+      </if>
+      <if test="readdressPostcode != null" >
+        #{readdressPostcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Readdress" >
+    update pt_readdress
+    <set >
+      <if test="readdressUserid != null" >
+        readdress_userid = #{readdressUserid,jdbcType=BIGINT},
+      </if>
+      <if test="readdressName != null" >
+        readdress_name = #{readdressName,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressPhone != null" >
+        readdress_phone = #{readdressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressAddress != null" >
+        readdress_address = #{readdressAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressIsdefault != null" >
+        readdress_isdefault = #{readdressIsdefault,jdbcType=INTEGER},
+      </if>
+      <if test="readdressPostcode != null" >
+        readdress_postcode = #{readdressPostcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where readdress_id = #{readdressId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Readdress" >
+    update pt_readdress
+    set readdress_userid = #{readdressUserid,jdbcType=BIGINT},
+      readdress_name = #{readdressName,jdbcType=VARCHAR},
+      readdress_phone = #{readdressPhone,jdbcType=VARCHAR},
+      readdress_address = #{readdressAddress,jdbcType=VARCHAR},
+      readdress_isdefault = #{readdressIsdefault,jdbcType=INTEGER},
+      readdress_postcode = #{readdressPostcode,jdbcType=VARCHAR}
+    where readdress_id = #{readdressId,jdbcType=BIGINT}
+  </update>
+</mapper>

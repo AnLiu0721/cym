@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ProductDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Product" >
+    <id column="pro_id" property="proId" jdbcType="BIGINT" />
+    <result column="pro_code" property="proCode" jdbcType="VARCHAR" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_kind" property="proKind" jdbcType="BIGINT" />
+    <result column="pro_newpro" property="proNewpro" jdbcType="INTEGER" />
+    <result column="pro_put" property="proPut" jdbcType="INTEGER" />
+    <result column="pro_date" property="proDate" jdbcType="TIMESTAMP" />
+    <result column="pro_imgid" property="proImgid" jdbcType="BIGINT" />
+    <result column="pro_decrition" property="proDecrition" jdbcType="VARCHAR" />
+    <result column="pro_price" property="proPrice" jdbcType="DOUBLE" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pro_id, pro_code, pro_name, pro_kind, pro_newpro, pro_put, pro_date, pro_imgid, pro_decrition, 
+    pro_price, pro_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_product
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByMoName" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_product
+     <where>
+      <if test="proName!=null">
+        and pro_decrition like CONCAT(CONCAT('%', #{proName}),'%')
+      </if>
+      <if test="start!=null and pagenum!=null">
+         LIMIT #{start} ,#{pagenum}
+       </if>
+    </where>
+  </select>
+  <!-- 查询模糊数据-->
+  <select id="selectByIf" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_product
+    <where>
+       <!--根据种类查找商品-->
+       <if test="prokind!=null and prokind!=''">
+	     and pro_kind=#{prokind}
+	   </if>
+      <!--根据名称查找商品-->
+      <if test="proName!=null and proName!=''">
+        and pro_name like  CONCAT(CONCAT('%', #{proName}),'%')
+      </if>
+      <!--根据父级id查询的二级所有商品-->
+      <if test="proparentid!=null and proparentid!=''">
+        and pro_kind  IN
+        (SELECT protype_id FROM pt_protype WHERE protype_parentid=#{proparentid})
+      </if>
+	    <!--根据价格查找商品-->
+       <if test="minprice!=null and maxprice!=null">
+        and pro_price between #{minprice} and #{maxprice} 
+       </if>
+        <!--根据英雄属性查找商品-->
+       <if test="title!=null and title!=''">
+	     and pro_decrition like  CONCAT(CONCAT('%', #{title}),'%') 
+	   </if>
+       <!--选择新品-->
+       <if test="sxuanze==1">
+         and pro_newpro in (1,3) 
+       </if>
+       <!--选择限定-->
+       <if test="sxuanze==2">
+         and pro_newpro in (2,3) 
+       </if>
+       <if test="num!=0 and num>0">
+           and pro_num >0 
+       </if>
+        <!--价格降序-->
+       <if test="sxuanze==3">
+         and 1=1 GROUP BY pro_price DESC 
+       </if>
+       <!--价格升序-->
+        <if test="sxuanze==4">
+         and 1=1 GROUP BY pro_price ASC 
+       </if>
+        <if test="start!=null and pagenum!=null">
+          LIMIT #{start} ,#{pagenum}
+       </if>
+    </where>
+  </select>
+  	<!--根据类别查找商品-->
+    <select id="selectByKind" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_product
+    where pro_kind IN(SELECT protype_id FROM pt_protype WHERE protype_parentid = #{ProParentiId})
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_product
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Product" >
+    insert into pt_product (pro_id, pro_code, pro_name, 
+      pro_kind, pro_newpro, pro_put, 
+      pro_date, pro_imgid, pro_decrition, 
+      pro_price, pro_num)
+    values (#{proId,jdbcType=BIGINT}, #{proCode,jdbcType=VARCHAR}, #{proName,jdbcType=VARCHAR}, 
+      #{proKind,jdbcType=BIGINT}, #{proNewpro,jdbcType=INTEGER}, #{proPut,jdbcType=INTEGER}, 
+      #{proDate,jdbcType=TIMESTAMP}, #{proImgid,jdbcType=BIGINT}, #{proDecrition,jdbcType=VARCHAR}, 
+      #{proPrice,jdbcType=DOUBLE}, #{proNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Product" >
+    insert into pt_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proCode != null" >
+        pro_code,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="proKind != null" >
+        pro_kind,
+      </if>
+      <if test="proNewpro != null" >
+        pro_newpro,
+      </if>
+      <if test="proPut != null" >
+        pro_put,
+      </if>
+      <if test="proDate != null" >
+        pro_date,
+      </if>
+      <if test="proImgid != null" >
+        pro_imgid,
+      </if>
+      <if test="proDecrition != null" >
+        pro_decrition,
+      </if>
+      <if test="proPrice != null" >
+        pro_price,
+      </if>
+      <if test="proNum != null" >
+        pro_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="proCode != null" >
+        #{proCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proKind != null" >
+        #{proKind,jdbcType=BIGINT},
+      </if>
+      <if test="proNewpro != null" >
+        #{proNewpro,jdbcType=INTEGER},
+      </if>
+      <if test="proPut != null" >
+        #{proPut,jdbcType=INTEGER},
+      </if>
+      <if test="proDate != null" >
+        #{proDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proImgid != null" >
+        #{proImgid,jdbcType=BIGINT},
+      </if>
+      <if test="proDecrition != null" >
+        #{proDecrition,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        #{proPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="proNum != null" >
+        #{proNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Product" >
+    update pt_product
+    <set >
+      <if test="proCode != null" >
+        pro_code = #{proCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proKind != null" >
+        pro_kind = #{proKind,jdbcType=BIGINT},
+      </if>
+      <if test="proNewpro != null" >
+        pro_newpro = #{proNewpro,jdbcType=INTEGER},
+      </if>
+      <if test="proPut != null" >
+        pro_put = #{proPut,jdbcType=INTEGER},
+      </if>
+      <if test="proDate != null" >
+        pro_date = #{proDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proImgid != null" >
+        pro_imgid = #{proImgid,jdbcType=BIGINT},
+      </if>
+      <if test="proDecrition != null" >
+        pro_decrition = #{proDecrition,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        pro_price = #{proPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="proNum != null" >
+        pro_num = #{proNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Product" >
+    update pt_product
+    set pro_code = #{proCode,jdbcType=VARCHAR},
+      pro_name = #{proName,jdbcType=VARCHAR},
+      pro_kind = #{proKind,jdbcType=BIGINT},
+      pro_newpro = #{proNewpro,jdbcType=INTEGER},
+      pro_put = #{proPut,jdbcType=INTEGER},
+      pro_date = #{proDate,jdbcType=TIMESTAMP},
+      pro_imgid = #{proImgid,jdbcType=BIGINT},
+      pro_decrition = #{proDecrition,jdbcType=VARCHAR},
+      pro_price = #{proPrice,jdbcType=DOUBLE},
+      pro_num = #{proNum,jdbcType=INTEGER}
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+</mapper>

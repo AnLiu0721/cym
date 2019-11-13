@@ -1,0 +1,599 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+#ni,a{
+	color: inherit;
+	text-decoration: none;
+}
+body{
+	min-width: 1300px;
+}
+header{
+	position: fixed;
+	top: 0;
+	background-color: black;
+	width: 100%;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	color: darkgray;
+	min-width: 1100px;
+	z-index: 10;
+}
+.logo{
+	margin-left: 30px;
+}
+.headerAD{
+	width: 320px;
+	height: 20px;
+	padding: 5px;
+	margin-left: 15px;
+	background-color: #2E2E2E;
+	overflow: hidden;
+	font-size: 13px;
+	color: orange;
+	white-space: nowrap;
+}
+
+.headerInfo{
+	position: absolute;
+	right: 30px;
+	width: 280px;
+	height: 70px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.listNum{
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	color: white;
+	margin-left: 3px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 5px;
+	background-color: orangered;
+}
+
+
+.midDiv{
+	position: relative;
+	width: auto;
+	display: flex;
+	align-items: center;
+	min-width: 1300px;
+}
+.divTitle{
+	width: 50px;
+	height: inherit;
+	writing-mode: tb;
+	font-size: 25px;
+	color: white;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+.newPro .divTitle{
+	background-color: #FF4500;
+	position: absolute;
+	left: 0;
+}
+.newPro .divCon{
+	text-align: center;
+	margin-left: 10px;
+}
+.newPro .divCon img{
+	height: 200px;
+	/*border: 1px double black;*/
+}
+.helpCenter .divTitle{
+	background-color: yellowgreen;
+}
+.helpCenter .divCon{
+	/*width: 200px;*/
+	margin-left: 150px;
+}
+.newPro{
+	margin-top: 5px;
+	height: 250px;
+	justify-content: space-around;
+}
+.helpCenter{
+	margin-top: 10px;
+	background-color: #F6F6F6;
+	height: 200px;
+}
+.helpTitle{
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.helpCon{
+	font-size: 14px;
+	line-height: 30px;
+}
+footer{
+	position: relative;
+	height: 100px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+footer img{
+	border-right: 1px solid gainsboro;
+	vertical-align: middle;
+	margin-right: 20px;
+	padding-right: 10px;
+}
+footer p{
+	line-height: 20px;
+	font-size: 12px;
+}
+footer span{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+footer a:hover{
+	text-decoration: underline;
+}
+body{
+    		overflow-x: hidden;
+    		font-size: 14px;
+    	}
+    	ul {
+		    list-style-image: none;
+		    list-style-position: outside;
+		    list-style-type: none;
+		}
+		.clearfix:after{
+			content: ".";
+			display: block;
+			clear: both;
+			height: 0;
+			visibility: hidden;
+		}
+		.buybar{
+			position: relative;
+			width: 1200px;
+            margin: 0px auto;
+			margin-top: 90px;
+			padding-top:20px ;
+		}
+		.buyleft{
+			width: 900px;
+		}
+    	.buyshop{
+    		    margin-bottom: 40px;
+    	}
+    	.buytop {
+		    height: 43px;
+		    background: #efefef;
+		    color: #000;
+		}
+		.buytop li {
+			    float: left;
+			    line-height: 43px;
+			    text-align: center;
+			    font-size: 14px;
+			}
+			.buylist {
+             border-bottom: 1px solid #e2e2e2;
+           }
+			.buylist li.li_sp {
+				    text-align: left;
+				    width: 348px;
+				    height: 106px;
+				    padding-top: 14px;
+				}
+			.buy_xuan {
+					    width: 60px;
+					    height: 43px;
+					    line-height: 43px;
+					    text-indent: 10px;
+					    text-align: left;
+					}
+			.li_inp{
+				    width: 60px;
+				}
+				li.li_sp{
+				    width: 348px;
+				    text-align: left;
+				    text-indent: 10px;
+				}
+				.li_dj {
+				    width: 110px;
+				}
+				.li_sl {
+				    width: 152px;
+				}
+				.li_xj {
+				    width: 80px;
+				}
+				.li_cz {
+				    width: 130px;
+				}
+				.buyli li {
+				    float: left;
+				}
+				.buy_dian {
+				    width: 60px;
+				    height: 40px;
+				    margin-top: 32px;
+				    text-indent: 13px;
+				    text-align: left;
+				}
+				.gouimg {
+				    width: 88px;
+				    height: 88px;
+				    float: left;
+				    display: block;
+				    margin-right: 10px;
+				}
+				.buysp_wen {
+				    height: 96px;
+				    width: 210px;
+				    color: #666;
+				    line-height: 20px;
+				}
+			.buysp_wen a {
+				    line-height: 24px;
+				    color: #333;
+				    font-size: 14px;
+				    display: block;
+				    height: 24px;
+				    overflow: hidden;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				}
+				.l{
+				    display: block;
+				    font-size: 12px;
+				    line-height: 20px;
+				}
+				.c999 {
+				    color: #999;
+				}
+				.buylist li {
+					float: left;
+				    text-align: center;
+				}
+			.buylist li.li_dj {
+				    padding-top: 48px;
+				}
+				
+			.li_sl .shuliang {
+				     width: 125px;
+				    margin: 0 auto;
+				    padding-top: 40px;
+				}
+			.jia, .jian {
+				    display: inline-block;
+				    padding: 6px 12px;
+				    margin-bottom: 0;
+				    font-size: 8px;
+				    font-weight: normal;
+				    line-height: 1.42857143;
+				    text-align: center;
+				    white-space: nowrap;
+				    vertical-align: middle;
+				    border: 1px solid #DCDCDC;
+				    cursor: pointer;
+				}
+				
+				.li_sl input{
+					width: 50px;height: 27px; text-align: center;
+				}
+			  .buylist li.li_cz,.buylist li.li_xj {
+				    padding-top: 48px;
+				}
+			.buy_jix {
+				    height: 43px;
+				    background: #fff;
+				    color: #000;
+				    border-bottom: 1px solid #e2e2e2;
+				}
+			.buy_jix li.li_sp a {
+				    line-height: 43px;
+				    color: #ed3029;
+				    font-size: 14px;
+				}
+			.buy_jix li.li_cz a {
+			    line-height: 43px;
+			    height: 43px;
+			    display: block;
+			    color: #999;
+			    font-size: 12px;
+			    text-indent: 44px;
+			    background: url(../img/delete.jpg) no-repeat 28px center;
+			}
+			.buy_jix li.li_cz a:hover {
+				color: #ed3029;
+				text-decoration: underline;
+			}
+    	.fl{
+			  float: left;
+			  display: inline;
+			}
+		.fr{
+				 float: right;
+			     display: inline;
+			}
+		.bottomshop {
+				   width: 100%;
+				    height: 102px;
+			}
+		.fuwubar {
+				    padding-top: 28px;
+				    background: #fff;
+				    height: 70px;
+			}
+		.acolor{
+					background-color: #AEB2B3;
+					color: white;
+			}
+		.fuwu{
+					width: 70%;
+					margin: 0px auto;
+			}
+		.w980 {
+				    width: 1190px;
+				    margin: 0px auto;
+				    height: auto;
+			}
+		.fuwu li span.fw1 {
+				    background: url(../img/base.png) no-repeat -10px -234px;
+			}
+		.fuwu li span.fw2 {
+			    background: url(../img/base.png) no-repeat -73px -234px;
+			}
+		.fuwu li span.fw4 {
+				    background: url(../img/base.png) no-repeat -179px -234px;
+			}
+		.fuwu li span {
+				    display: block;
+				    width: 42px;
+				    height: 52px;
+				    float: left;
+			}
+			.fuwu li a {
+				    display: block;
+				    line-height: 52px;
+				    height: 52px;
+				    float: left;
+				    color: #222;
+				    font-size: 14px;
+				    cursor: default;
+				}
+			.fu1 {
+				    width: 240px;
+				}
+			.fu2 {
+				    width: 228px;
+				}
+			.fu4 {
+				    width: 160px;
+				}
+			.buyrightbar {
+				    width: 280px;
+				}
+			.navBox_1 {
+				    width: 274px;
+				    border: 1px #bababa solid;
+				    border-top: 3px #fa322c solid;
+				    padding-bottom: 4px;
+				    background: #efefef;
+				    float: right;
+				}
+			.navBox_2 {
+				top:90px;
+				    width: 274px;
+				    border: 1px #bababa solid;
+				    border-top: 3px #fa322c solid;
+				    padding-bottom: 4px;
+				    background: #efefef;
+				    z-index: 998;
+				    position: fixed;
+				    
+				}
+			.navBox_1 h3 {
+				    line-height: 42px;
+				    height: 42px;
+				    background: url(../img/base.jpg) left -124px no-repeat #efefef;
+				    font-weight: normal;
+				    text-indent: 34px;
+				}
+			.buybai {
+				    background: #FFF;
+				    width: 266px;
+				    margin: 0px auto;
+				    height: auto;
+				}
+			.buy_youf {
+				    width: 240px;
+				    padding: 10px 13px;
+				    line-height: 26px;
+				}
+			.cfb6 {
+				    color: #ed3029;
+				}
+			.buy_you2 {
+				    background: url(../img/base.jpg) left -205px no-repeat;
+				    width: 152px;
+				    height: 26px;
+				    line-height: 26px;
+				    padding-top: 4px;
+				}
+			.pl10 {
+					padding-left: 10px;
+					}
+			.fb {
+				    font-weight: bold;
+				    color: #FFF;
+				}
+			.buy_youf a {
+				    color: #FFF;
+				    text-decoration: underline;
+				    padding-left: 22px;
+				}
+			.buy_wen {
+				    width: 240px;
+				    padding: 10px 13px;
+				    line-height: 26px;
+				    color: #666;
+				    font-size: 14px;
+				}
+			a.buy_bot {
+				    width: 240px;
+				    height: 46px;
+				    line-height: 46px;
+				    color: #FFF;
+				    display: block;
+				    background: #ed3029;
+				    font-size: 18px;
+				    text-align: center;
+				}
+				a.buy_bothui {
+					    width: 240px;
+					    height: 46px;
+					    line-height: 46px;
+					    color: #999;
+					    display: block;
+					    background: #666;
+					    font-size: 18px;
+					    text-align: center;
+					    cursor: pointer;
+					}
+				.mt10 {
+				   		margin-top: 10px;
+				}
+				.buy_baoz {
+					    font-size: 12px;
+					    padding-top: 0px;
+					}
+				.buy_baozleft {
+					    font-size: 12px;
+					    line-height: 60px;
+					    width: 60px;
+					    text-align: center;
+					}
+				.buy_baozright {
+					    line-height: 20px;
+					    border-left: 1px #e3e1e1 solid;
+					    padding-left: 10px;
+					    padding-top: 2px;
+					    padding-bottom: 2px;
+					}
+                .buyxgno {
+					    height: 44px;
+					    line-height: 44px;
+					    text-align: center;
+					    background: #efefef;
+					    color: #000;
+					    font-size: 14px;
+					    padding: 134px 0px;
+					    margin-bottom: 20px;
+					}
+					.buyxgno a {
+					    color: #ed302a;
+					    text-decoration: underline;
+					}
+					.msgbox{
+				background-color: #000;
+				opacity: 0.3;
+				width:100%;
+				height:100%;
+				position:fixed;
+				top:0%;
+				left:0;
+				z-index:4;
+				display: none;
+			}
+		.shoubox{
+				width: 380px;
+				margin:0 auto;
+				border-radius: 7px;
+				position: fixed;
+				top: 35%;
+				left: 35%;
+				z-index: 5;
+				background-color: white;
+				display: none;
+			}
+		.sc_hd {
+			    background: #f5f5f5;
+			    height: 50px;
+			    border-bottom: 1px solid #ddd;
+			    border-radius: 3px 3px 0 0;
+			    font: 16px/50px ΢���ź�;
+			    padding: 0 15px 0 20px;
+			}
+		.sc_hd h4 {
+		    float: left;
+		    font-weight: 800;
+		}
+		.sc_hd a{
+			    display: block;
+			    float: right;
+			    width: 30px;
+			    height: 30px;
+			    margin-top: 10px;
+		}
+		.sc_hd a s{
+			    display: block;
+			    width: 14px;
+			    height: 14px;
+			    overflow: hidden;
+			    background: url(../img/bt_close.png) 0px 0 no-repeat;
+			    margin: 8px 0 0 8px;
+		}
+		.pd20{padding-bottom: 20px;}
+		.sc_bd p{
+			font-size: 14px;
+			padding: 10px 20px;
+		}
+		.sc_buy {
+				    display: block;
+				    width: 130px;
+				    height: 38px;
+				    font: 800 16px/38px Microsoft YaHei;
+				    color: #fff;
+				    background: #f74a4a;
+				    border-radius: 3px;
+				    margin: 0 auto;
+				    text-align: center;
+				}
+#ni,#nicheng{
+	cursor: pointer;
+	position: relative;
+}
+#nicheng>a:hover{
+	text-decoration: underline;
+}
+#nicheng li a:hover{
+	color: white;
+}
+
+.info ul{
+
+	padding-top: 5px;
+	list-style: none;
+	width: 100px;
+	text-align: center;
+	z-index: 15;
+}
+.info ul li{
+	width: 99px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	border-top: 1PX solid saddlebrown;
+	background-color: #5A5A5A;
+	opacity: 0.9;
+	z-index: 15;
+}

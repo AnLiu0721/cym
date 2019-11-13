@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ProtypeDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Protype" >
+    <id column="protype_id" property="protypeId" jdbcType="BIGINT" />
+    <result column="protype_name" property="protypeName" jdbcType="VARCHAR" />
+    <result column="protype_parentid" property="protypeParentid" jdbcType="BIGINT" />
+    <result column="protype_type" property="protypeType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    protype_id, protype_name, protype_parentid, protype_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_protype
+    where protype_id = #{protypeId,jdbcType=BIGINT}
+  </select>
+  <!--根据父级id查询类别名称-->
+  <select id="selectByParentid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_protype
+    where protype_parentid = #{Parentid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_protype
+    where protype_id = #{protypeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Protype" >
+    insert into pt_protype (protype_id, protype_name, protype_parentid, 
+      protype_type)
+    values (default, #{protypeName,jdbcType=VARCHAR}, #{protypeParentid,jdbcType=BIGINT}, 
+      #{protypeType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Protype" >
+    insert into pt_protype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="protypeId != null" >
+        protype_id,
+      </if>
+      <if test="protypeName != null" >
+        protype_name,
+      </if>
+      <if test="protypeParentid != null" >
+        protype_parentid,
+      </if>
+      <if test="protypeType != null" >
+        protype_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="protypeId != null" >
+        #{protypeId,jdbcType=BIGINT},
+      </if>
+      <if test="protypeName != null" >
+        #{protypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="protypeParentid != null" >
+        #{protypeParentid,jdbcType=BIGINT},
+      </if>
+      <if test="protypeType != null" >
+        #{protypeType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Protype" >
+    update pt_protype
+    <set >
+      <if test="protypeName != null" >
+        protype_name = #{protypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="protypeParentid != null" >
+        protype_parentid = #{protypeParentid,jdbcType=BIGINT},
+      </if>
+      <if test="protypeType != null" >
+        protype_type = #{protypeType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where protype_id = #{protypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Protype" >
+    update pt_protype
+    set protype_name = #{protypeName,jdbcType=VARCHAR},
+      protype_parentid = #{protypeParentid,jdbcType=BIGINT},
+      protype_type = #{protypeType,jdbcType=INTEGER}
+    where protype_id = #{protypeId,jdbcType=BIGINT}
+  </update>
+</mapper>

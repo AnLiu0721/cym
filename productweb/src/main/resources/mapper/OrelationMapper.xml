@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.OrelationDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Orelation" >
+    <id column="orderrelation_id" property="orderrelationId" jdbcType="BIGINT" />
+    <result column="orderrelation_orderid" property="orderrelationOrderid" jdbcType="BIGINT" />
+    <result column="orderrelation_proid" property="orderrelationProid" jdbcType="BIGINT" />
+    <result column="orderrelation_pronum" property="orderrelationPronum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderrelation_id, orderrelation_orderid, orderrelation_proid, orderrelation_pronum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_order_relation
+    where orderrelation_id = #{orderrelationId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_order_relation
+    where orderrelation_id = #{orderrelationId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Orelation" >
+    insert into pt_order_relation (orderrelation_id, orderrelation_orderid, 
+      orderrelation_proid, orderrelation_pronum)
+    values (default, #{orderrelationOrderid,jdbcType=BIGINT},
+      #{orderrelationProid,jdbcType=BIGINT}, #{orderrelationPronum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Orelation" >
+    insert into pt_order_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderrelationId != null" >
+        orderrelation_id,
+      </if>
+      <if test="orderrelationOrderid != null" >
+        orderrelation_orderid,
+      </if>
+      <if test="orderrelationProid != null" >
+        orderrelation_proid,
+      </if>
+      <if test="orderrelationPronum != null" >
+        orderrelation_pronum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderrelationId != null" >
+        #{orderrelationId,jdbcType=BIGINT},
+      </if>
+      <if test="orderrelationOrderid != null" >
+        #{orderrelationOrderid,jdbcType=BIGINT},
+      </if>
+      <if test="orderrelationProid != null" >
+        #{orderrelationProid,jdbcType=BIGINT},
+      </if>
+      <if test="orderrelationPronum != null" >
+        #{orderrelationPronum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Orelation" >
+    update pt_order_relation
+    <set >
+      <if test="orderrelationOrderid != null" >
+        orderrelation_orderid = #{orderrelationOrderid,jdbcType=BIGINT},
+      </if>
+      <if test="orderrelationProid != null" >
+        orderrelation_proid = #{orderrelationProid,jdbcType=BIGINT},
+      </if>
+      <if test="orderrelationPronum != null" >
+        orderrelation_pronum = #{orderrelationPronum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where orderrelation_id = #{orderrelationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Orelation" >
+    update pt_order_relation
+    set orderrelation_orderid = #{orderrelationOrderid,jdbcType=BIGINT},
+      orderrelation_proid = #{orderrelationProid,jdbcType=BIGINT},
+      orderrelation_pronum = #{orderrelationPronum,jdbcType=BIGINT}
+    where orderrelation_id = #{orderrelationId,jdbcType=BIGINT}
+  </update>
+</mapper>

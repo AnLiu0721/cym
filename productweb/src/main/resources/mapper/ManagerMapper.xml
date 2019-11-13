@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ManagerDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Manager" >
+    <id column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="manager_username" property="managerUsername" jdbcType="VARCHAR" />
+    <result column="manager_password" property="managerPassword" jdbcType="VARCHAR" />
+    <result column="manager_name" property="managerName" jdbcType="VARCHAR" />
+    <result column="manager_phone" property="managerPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    manager_id, manager_username, manager_password, manager_name, manager_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_manager
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_manager
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Manager" >
+    insert into pt_manager (manager_id, manager_username, manager_password, 
+      manager_name, manager_phone)
+    values (#{managerId,jdbcType=BIGINT}, #{managerUsername,jdbcType=VARCHAR}, #{managerPassword,jdbcType=VARCHAR}, 
+      #{managerName,jdbcType=VARCHAR}, #{managerPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Manager" >
+    insert into pt_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="managerUsername != null" >
+        manager_username,
+      </if>
+      <if test="managerPassword != null" >
+        manager_password,
+      </if>
+      <if test="managerName != null" >
+        manager_name,
+      </if>
+      <if test="managerPhone != null" >
+        manager_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="managerUsername != null" >
+        #{managerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null" >
+        #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null" >
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null" >
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Manager" >
+    update pt_manager
+    <set >
+      <if test="managerUsername != null" >
+        manager_username = #{managerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null" >
+        manager_password = #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null" >
+        manager_name = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null" >
+        manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Manager" >
+    update pt_manager
+    set manager_username = #{managerUsername,jdbcType=VARCHAR},
+      manager_password = #{managerPassword,jdbcType=VARCHAR},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      manager_phone = #{managerPhone,jdbcType=VARCHAR}
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </update>
+</mapper>

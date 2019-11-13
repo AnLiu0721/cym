@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CollectDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Collect" >
+    <id column="collect_id" property="collectId" jdbcType="BIGINT" />
+    <result column="collect_userid" property="collectUserid" jdbcType="BIGINT" />
+    <result column="collect_proid" property="collectProid" jdbcType="BIGINT" />
+    <result column="collect_data" property="collectData" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collect_id, collect_userid, collect_proid, collect_data
+  </sql>
+  <!--选择单个的收藏-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_collect
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </select>
+  <!--根据用户查找收藏商品-->
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_collect
+    where collect_userid = #{collectUid}
+  </select>
+  <!--根据商品单个收藏商品数量-->
+  <select id="selectByPid" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select
+    count(collect_id)
+    from pt_collect
+    where collect_proid = #{collecPid}
+  </select>
+  <!--根据用户和商品id查找-->
+  <select id="selectByUPid" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_collect
+    where collect_userid = #{collectUserid} and collect_proid=#{collectProid}
+  </select>
+  <!--选择所有的收藏-->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from pt_collect
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pt_collect
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </delete>
+  <!--根据用户和商品id删除收藏-->
+  <delete id="deleteByUPid" parameterType="java.util.Map" >
+    delete from pt_collect
+    where collect_userid = #{collectUserid} and collect_proid=#{collectProid}
+  </delete>
+  <!--根据用户id删除收藏-->
+  <delete id="deleteByUid" parameterType="java.lang.Long" >
+    delete from pt_collect
+    where collect_userid = #{collectUserid}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Collect"  >
+    insert into pt_collect (collect_id, collect_userid, collect_proid,
+      collect_data)
+    values (default, #{collectUserid,jdbcType=BIGINT}, #{collectProid,jdbcType=BIGINT},
+      #{collectData,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Collect" >
+    insert into pt_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        collect_id,
+      </if>
+      <if test="collectUserid != null" >
+        collect_userid,
+      </if>
+      <if test="collectProid != null" >
+        collect_proid,
+      </if>
+      <if test="collectData != null" >
+        collect_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        #{collectId,jdbcType=BIGINT},
+      </if>
+      <if test="collectUserid != null" >
+        #{collectUserid,jdbcType=BIGINT},
+      </if>
+      <if test="collectProid != null" >
+        #{collectProid,jdbcType=BIGINT},
+      </if>
+      <if test="collectData != null" >
+        #{collectData,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Collect" >
+    update pt_collect
+    <set >
+      <if test="collectUserid != null" >
+        collect_userid = #{collectUserid,jdbcType=BIGINT},
+      </if>
+      <if test="collectProid != null" >
+        collect_proid = #{collectProid,jdbcType=BIGINT},
+      </if>
+      <if test="collectData != null" >
+        collect_data = #{collectData,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Collect" >
+    update pt_collect
+    set collect_userid = #{collectUserid,jdbcType=BIGINT},
+      collect_proid = #{collectProid,jdbcType=BIGINT},
+      collect_data = #{collectData,jdbcType=TIMESTAMP}
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </update>
+</mapper>
